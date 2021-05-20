@@ -47,6 +47,7 @@ export default {
         data: this.credentials,
       }).then(res => {
         console.log(res)
+        this.$router.push({ name: 'Login'})
       }).catch(err => {
         console.log(err)
       })
