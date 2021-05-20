@@ -1,0 +1,93 @@
+<template>
+  <div id="app">
+    <div id="nav" class="text-left">
+      <span v-if="isLogin">
+        <router-link  to="/">Home</router-link> 
+        <router-link to="/search">Search</router-link>
+        <router-link to="#" @click.native="onLogout">Logout</router-link> 
+      </span>
+      <span v-else>
+        <router-link :to="{ name: 'Signup' }">Signup</router-link> |
+        <router-link :to="{ name: 'Login' }">Login</router-link> 
+      </span>
+    </div>
+    <b-spinner
+      class="d-block ml-auto mr-auto"
+      v-if="loading"
+      label="Spinning"
+    ></b-spinner>
+    <router-view @login="onLogin" :isLogin="isLogin" />
+  </div>
+</template>
+<script>
+import { mapState } from "vuex"
+export default {
+  name: 'App',
+  data: function () {
+    return {
+      isLogin: false,
+    }
+  },
+  methods: {
+    onLogin: function () {
+      this.isLogin = true
+    },
+    onLogout: function () {
+      localStorage.removeItem('jwt')
+      this.isLogin = false
+      this.$router.push({ name: 'Login'})
+    }
+  },
+  created: function () {
+    const jwt = localStorage.getItem('jwt')
+
+    if (jwt) {
+      this.isLogin = true
+    }
+  },
+  computed: {
+    ...mapState(["loading"]),
+  },
+};
+</script>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap");
+* {
+  color: #ffffff;
+}
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+#app {
+  background-color: rgb(20, 20, 20);
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: #2c3e50;
+  min-height: 100vh;
+}
+
+#nav {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 99;
+  background-color: black;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+.router-link-active {
+  /* color: white !important; */
+}
+.router-link-exact-active {
+  color: white !important;
+}
+</style>
