@@ -2,9 +2,9 @@
   <div id="app">
     <div id="nav" class="text-left">
       <span v-if="isLogin">
-        <router-link  to="/">Home</router-link> 
-        <router-link to="/search">Search</router-link>
-        <router-link to="/articles/article_list">Article</router-link>
+        <router-link  to="/">Home</router-link> |
+        <router-link to="/search">Search</router-link> |
+        <router-link to="/articles/article_form">Article</router-link> |
         <router-link to="#" @click.native="onLogout">Logout</router-link> 
       </span>
       <span v-else>
@@ -54,13 +54,13 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap");
 * {
-  color: #ffffff;
+  color: #000000;
 }
 body {
   font-family: "Noto Sans KR", sans-serif;
 }
 #app {
-  background-color: rgb(20, 20, 20);
+  background-color: rgb(255, 255, 255);
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -74,12 +74,12 @@ body {
   padding: 20px;
   position: relative;
   z-index: 99;
-  background-color: black;
+  background-color: rgb(248, 248, 248);
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #95a0ac;
 }
 
 #nav a.router-link-exact-active {
@@ -89,6 +89,6 @@ body {
   /* color: white !important; */
 }
 .router-link-exact-active {
-  color: white !important;
+  color: rgb(5, 5, 5) !important;
 }
 </style>

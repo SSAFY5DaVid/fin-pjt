@@ -1,32 +1,27 @@
 <template>
   <div>
-    <div class="d-flex flex-wrap" v-if="nowPlaying">
-      <div class="h4 ml-3 mt-5 mb-4 text-white">Now Playing</div>
+    <div class="container d-flex flex-wrap" v-if="nowPlaying">
+      <div class="h4 ml-3 mt-5 mb-4">Now Playing</div>
       <MovieLists :movieList="nowPlaying"></MovieLists>
       <MovieText :text="'Popular'"></MovieText>
+      <!-- <div class="h4 ml-3 mt-5 mb-4">Popular</div> -->
       <MovieLists :movieList="popular"></MovieLists>
       <!-- <div class="h4 ml-3 mt-5 mb-4 text-white">Comming Soon</div> -->
       <MovieText :text="'Comming Soon'"></MovieText>
+      <!-- <div class="h4 ml-3 mt-5 mb-4">Comming Soon</div> -->
       <MovieLists :movieList="upComming"></MovieLists>
       <!-- <MovieLists :movieList="movieList"></MovieLists> -->
-      <!-- <div
-        class="movie-card"
-        style="width:125px;"
-        v-for="li in movieList"
-        :key="li.id"
-      >
-        <movie-card :li="li" :image="image"></movie-card>
-      </div> -->
+      
     </div>
   </div>
 </template>
 
 <script>
-// import MovieCard from "../components/MovieCard";
-import MovieLists from "../components/MovieLists";
-import MovieText from "../components/MovieText";
-import { movieApi } from "../utils/axios";
-import { mapMutations } from "vuex";
+// import MovieCard from "../components/MovieCard"
+import MovieLists from "../components/MovieLists"
+import MovieText from "../components/MovieText"
+import { movieApi } from "../utils/axios"
+import { mapMutations } from "vuex"
 export default {
   data() {
     return {
@@ -43,35 +38,35 @@ export default {
   methods: {
     ...mapMutations(["SET_LOADING"]),
     // image(img) {
-    //   return `https://image.tmdb.org/t/p/w300/${img}`;
+    //   return `https://image.tmdb.org/t/p/w300/${img}`
     // },
   },
   
   created() {
-    this.SET_LOADING(true);
+    this.SET_LOADING(true)
   },
   async mounted() {
     try {
       // vuex를 통해서 로딩을 없애준다.
-      const { data } = await movieApi.nowPlaying();
-      console.log(data.results);
-      this.movieList = data.results;
-      const { nowPlaying, popular, upComing } = movieApi;
-      const requestArr = [nowPlaying, popular, upComing];
+      const { data } = await movieApi.nowPlaying()
+      console.log(data.results)
+      this.movieList = data.results
+      const { nowPlaying, popular, upComing } = movieApi
+      const requestArr = [nowPlaying, popular, upComing]
       const [now, pop, up] = await Promise.all(
         requestArr.map((li) => li().then((res) => res.data.results))
-      );
-      console.log("pop");
-      console.log(pop);
-      this.SET_LOADING(false);
-      this.nowPlaying = now;
-      this.popular = pop;
-      this.upComming = up;
+      )
+      console.log("pop")
+      console.log(pop)
+      this.SET_LOADING(false)
+      this.nowPlaying = now
+      this.popular = pop
+      this.upComming = up
     } catch (error) {
-      this.movieList = "해당 자료가 존재하지 않습니다.";
+      this.movieList = "해당 자료가 존재하지 않습니다."
     }
   },
-};
+}
 </script>
 
 <style>
@@ -96,6 +91,6 @@ export default {
 .movie-date {
   font-size: 10px;
   margin-top: 5px;
-  color: #cccccc;
+  color: #4b4b4b;
 }
 </style>

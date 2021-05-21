@@ -19,7 +19,7 @@
 
 <script>
 
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 export default {
 
 
@@ -28,14 +28,14 @@ export default {
   },
   methods: {
     image(img) {
-      return `https://image.tmdb.org/t/p/w300/${img}`;
+      return `https://image.tmdb.org/t/p/w300/${img}`
     },
     goDetail(id){
-      // console.log(id);
-      this.$router.push(`detail/${id}`);
+      // console.log(id)
+      this.$router.push(`detail/${id}`)
     }
   },
-};
+}
 
 </script>
 <style></style>
