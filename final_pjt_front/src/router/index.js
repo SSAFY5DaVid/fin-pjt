@@ -7,6 +7,9 @@ import Search from "@/views/Search.vue"
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import ArticleForm from '@/views/articles/ArticleForm'
+import ArticleList from '@/views/articles/ArticleList'
+import ArticleCreated from '@/views/articles/ArticleCreated'
+
 
 Vue.use(VueRouter)
 
@@ -46,6 +49,17 @@ const routes = [
     name: 'ArticleForm',
     component: ArticleForm,
   },
+  {
+    path: '/articles/article_list',
+    name: 'ArticleList',
+    component: ArticleList,
+  },
+  {
+    path: '/articles/article_created',
+    name: 'ArticleCreated',
+    component: ArticleCreated,
+  },
+  
 ]
 
 const router = new VueRouter({
