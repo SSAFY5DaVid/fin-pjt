@@ -17,6 +17,7 @@ export default {
     return {
       content : '',
       title : '',
+
     }
   },
   methods : {
@@ -24,6 +25,7 @@ export default {
       const Article = {
         title: this.title,
         content: this.content,
+
       }
 
       axios({

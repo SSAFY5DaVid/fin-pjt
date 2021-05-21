@@ -12,7 +12,7 @@
         <div class="col-2" >작성일</div>       
       </div>
       <div v-for="review in Posts" :key="review.id">
-        <div class="row d-flex mb-2">
+        <div class="row d-flex mb-2" >
           <div class="col-4 article-title">{{review.title}}</div>
           <div class="col-4 article-content">{{review.content}}</div> 
           <div class="col-2">{{ getCreatedAt(review) }}</div>
@@ -44,9 +44,14 @@ export default {
       }
       return config
     },
+    onClick : function (review) {
+      window.location.href=`http://localhost:8080/articles/post_detail?review_id=${review.id}`
+    },
     getCreatedAt : function (review) {
       return moment(review.created_at).startOf('minute').fromNow()   
     },
+    
+
   },
   created: function () {
     const config = this.setToken()
