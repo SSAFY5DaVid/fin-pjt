@@ -6,6 +6,7 @@ import MovieDetail from "@/views/MovieDetail.vue"
 import Search from "@/views/Search.vue"
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
+import ArticleForm from '@/views/articles/ArticleForm'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/accounts/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/articles/article_form',
+    name: 'ArticleForm',
+    component: ArticleForm,
   },
 ]
 
