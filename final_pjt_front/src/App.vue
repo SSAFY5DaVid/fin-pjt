@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="text-left">
+    <div id="nav" class="navbar sticky-top d-flex justify-content-between">
       <span v-if="isLogin">
         <router-link  to="/">Home</router-link> |
         <router-link to="/search">Search</router-link> |
@@ -72,9 +72,9 @@ body {
 #nav {
   text-align: center;
   padding: 20px;
-  position: relative;
+  /* position: relative; */
   z-index: 99;
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(241, 241, 241);
 }
 
 #nav a {
@@ -83,12 +83,12 @@ body {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #7e3371;
 }
-.router-link-active {
-  /* color: white !important; */
-}
-.router-link-exact-active {
+/* .router-link-active {
+  color: white !important;
+} */
+/* .router-link-exact-active {
   color: rgb(5, 5, 5) !important;
-}
+} */
 </style>

@@ -1,19 +1,18 @@
 <template>
-  <div >
-    <h1>Signup</h1>
-    <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username">
+  <div class="login-box">
+    <div class="align-items-center">
+      <h1>Signup</h1>
+      <div>
+        <input class="btn btn-secondary login-form my-3" placeholder="사용자 이름" type="text" id="username" v-model="credentials.username">
+      </div>
+      <div>
+        <input class="btn btn-secondary login-form my-3" placeholder="비밀번호" type="password" id="password" v-model="credentials.password">
+      </div>
+      <div>
+        <input class="btn btn-secondary login-form my-3" placeholder="비밀번호 확인" type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
+      </div>
+      <button class="btn btn-secondary login-form my-3" @click="signup">회원가입</button>
     </div>
-    <div>
-      <label for="password">비밀번호: </label>
-      <input type="password" id="password" v-model="credentials.password">
-    </div>
-    <div>
-      <label for="passwordConfirmation">비밀번호 확인: </label>
-      <input type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
-    </div>
-    <button @click="signup">회원가입</button>
   </div>
 </template>
 

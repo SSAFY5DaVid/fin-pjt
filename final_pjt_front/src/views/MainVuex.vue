@@ -15,15 +15,15 @@
 </template>
 
 <script>
-// import MovieCard from "../components/MovieCard";
-import MovieListsVuex from "../components/MovieListsVuex";
-import { movieApi } from "../utils/axios";
-import { mapMutations } from "vuex";
+// import MovieCard from "../components/MovieCard"
+import MovieListsVuex from "../components/MovieListsVuex"
+import { movieApi } from "../utils/axios"
+import { mapMutations } from "vuex"
 export default {
   data() {
     return {
       movieList: {},
-    };
+    }
   },
   components: {
     // MovieCard,
@@ -32,34 +32,34 @@ export default {
   methods: {
     ...mapMutations(["SET_LOADING", "SET_NOW_PLAYING", "SET_POPULAR", "SET_UP_COMING"]),
     // image(img) {
-    //   return `https://image.tmdb.org/t/p/w300/${img}`;
+    //   return `https://image.tmdb.org/t/p/w300/${img}`
     // },
   },
   created() {
-    this.SET_LOADING(true);
+    this.SET_LOADING(true)
   },
   async mounted() {
     try {
       // vuex를 통해서 로딩을 없애준다.
-      const { data } = await movieApi.nowPlaying();
-      this.SET_LOADING(false);
-      console.log(data.results);
-      // this.movieList = data.results;
-      this.SET_NOW_PLAYING(data.results);
+      const { data } = await movieApi.nowPlaying()
+      this.SET_LOADING(false)
+      console.log(data.results)
+      // this.movieList = data.results
+      this.SET_NOW_PLAYING(data.results)
 
-      const { nowPlaying, popular, upComing } = movieApi;
-      const requestArr = [nowPlaying, popular, upComing];
+      const { nowPlaying, popular, upComing } = movieApi
+      const requestArr = [nowPlaying, popular, upComing]
       const [now, pop, up] = await Promise.all(
         requestArr.map((li) => li().then((res) => res.data))
-      );
+      )
       
-      console.log(now, pop, up);
+      console.log(now, pop, up)
     
     } catch (error) {
-      this.movieList = "해당 자료가 존재하지 않습니다.";
+      this.movieList = "해당 자료가 존재하지 않습니다."
     }
   },
-};
+}
 </script>
 
 <style>
@@ -84,6 +84,6 @@ export default {
 .movie-date {
   font-size: 10px;
   margin-top: 5px;
-  color: #cccccc;
+  color: #808080;
 }
 </style>

@@ -1,16 +1,18 @@
 <template>
-  <div>
+<div class="login-box">
+  <div class="align-items-center">
     <h1>Login</h1>
     <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username">
+      <input  class="btn btn-secondary login-form my-3" placeholder="username" type="text" v-model="credentials.username">
     </div>
     <div>
-      <label for="password">비밀번호: </label>
-      <input type="password" id="password" v-model="credentials.password">
+      <input  class="btn btn-secondary login-form my-3" placeholder="password" type="password" v-model="credentials.password" @keypress.enter="login">
     </div>
-    <button @click="login">로그인</button>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-secondary login-form my-3" @click="login">login</button>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -56,3 +58,25 @@ export default {
   },
 }
 </script>
+
+<style>
+.login-form {
+  min-width: 5%;
+}
+::placeholder { 
+  color: white;
+  opacity: 1;
+}
+
+.login-box {
+  position: relative;
+  width : 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  overflow: hidden;
+  padding: 100px;
+}
+
+</style>

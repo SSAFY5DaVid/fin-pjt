@@ -81,37 +81,37 @@
 </template>
 
 <script>
-import { movieApi } from "../utils/axios";
-import { mapMutations } from "vuex";
+import { movieApi } from "../utils/axios"
+import { mapMutations } from "vuex"
 export default {
   data() {
     return {
       movieDetail: {},
-    };
+    }
   },
   async mounted() {
-    this.SET_LOADING(true);
-    console.log(this.$route);
-    console.log(this.$route.params.id);
-    const { id } = this.$route.params;
-    const { data } = await movieApi.movieDetail(id);
+    this.SET_LOADING(true)
+    console.log(this.$route)
+    console.log(this.$route.params.id)
+    const { id } = this.$route.params
+    const { data } = await movieApi.movieDetail(id)
     // axios 요청 보내기
-    console.log(data);
-    this.movieDetail = data;
-    this.SET_LOADING(false);
+    console.log(data)
+    this.movieDetail = data
+    this.SET_LOADING(false)
     // backdro
   },
   methods: {
     ...mapMutations(["SET_LOADING"]),
     image(img) {
-      console.log();
-      return `https://image.tmdb.org/t/p/original/${img}`;
+      console.log()
+      return `https://image.tmdb.org/t/p/original/${img}`
     },
     youtube(src) {
-      return `https://www.youtube.com/embed/${src}`;
+      return `https://www.youtube.com/embed/${src}`
     },
   },
-};
+}
 </script>
 }
 
@@ -140,11 +140,12 @@ export default {
   right: 0;
   bottom: 0;
   min-height: 100vh;
-  background-color: rgb(40, 40, 40);
-  opacity: 0.8;
+  background-color: rgb(200, 200, 200);
+  opacity: 0.4;
   content: "";
   display: block;
 }
+
 .movie-content {
   position: relative;
   z-index: 999;
@@ -170,9 +171,9 @@ export default {
   font-size: 20px;
 }
 .movie-overview {
-  max-width: 60%;
-  font-size: 14px;
-  color: #dddddddd;
+  max-width: 65%;
+  font-size: 19px;
+  color: #141414dd;
 }
 .homepage-link:hover {
   opacity: 0.5;

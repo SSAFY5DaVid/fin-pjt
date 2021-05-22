@@ -87,10 +87,4 @@ export default {
 .movie-information {
   margin-top: 7px;
 }
-
-.movie-date {
-  font-size: 10px;
-  margin-top: 5px;
-  color: #4b4b4b;
-}
 </style>
