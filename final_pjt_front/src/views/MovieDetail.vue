@@ -1,10 +1,13 @@
 <template>
-  <div class="movie-detail" v-if="movieDetail && movieDetail.backdrop_path">
+  <div class="container movie-detail" v-if="movieDetail && movieDetail.backdrop_path">
     <div
       class="movie-detail-image"
       :style="{ backgroundImage: `url(${image(movieDetail.backdrop_path)})` }"
     ></div>
+    
     <div class="movie-content d-flex">
+      <router-link class="btn btn-secondary ghost-button" :to="`/detail/${movieDetail.id}/movie_review_form`">리뷰 쓰기</router-link>
+      
       <div style="">
         <img
           class="mt-2 "

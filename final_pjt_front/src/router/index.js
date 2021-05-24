@@ -9,7 +9,7 @@ import Login from '@/views/accounts/Login'
 import ArticleForm from '@/views/articles/ArticleForm'
 import ArticleList from '@/views/articles/ArticleList'
 import ArticleCreated from '@/views/articles/ArticleCreated'
-
+import MovieReviewForm from '@/views/MovieReviewForm'
 
 Vue.use(VueRouter)
 
@@ -59,7 +59,11 @@ const routes = [
     name: 'ArticleCreated',
     component: ArticleCreated,
   },
-  
+  {
+    path: '/detail/:id/movie_review_form',
+    name: 'movie_review_form',
+    component: MovieReviewForm,
+  },  
 ]
 
 const router = new VueRouter({
