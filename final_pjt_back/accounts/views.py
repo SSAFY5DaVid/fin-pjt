@@ -2,7 +2,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer
+from django.contrib.auth import get_user_model
 
+# model의 User class를 말함
+User = get_user_model()
 
 @api_view(['POST'])
 def signup(request):

@@ -12,13 +12,14 @@ from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerial
 from django.db.models import Count
 
 
+
 @api_view(['GET', 'POST'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def movie_review_list_create(request):
     if request.method == 'GET':
-        # movie_reviews = MovieReview.objects.all().order_by('-created_at')
-        movie_reviews = MovieReview.objects.all()
+        movie_reviews = MovieReview.objects.all().order_by('-created_at')
+        # movie_reviews = MovieReview.objects.all()
         serializer = MovieReviewSerializer(movie_reviews, many=True)
         return Response(serializer.data)
     else:

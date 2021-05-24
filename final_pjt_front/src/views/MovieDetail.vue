@@ -54,16 +54,6 @@
           ></a>
         </div>
         <div class="movie-overview mt-3">{{ movieDetail.overview }}</div>
-        <!-- <div class="mt-3"> -->
-        <!-- <b-embed
-          v-if="movieDetail.videos && movieDetail.videos.results"
-            type="iframe"
-             :key="movieDetail.videos.results[0].key"
-             
-            aspect="16by9 "
-             :src="youtube(movieDetail.videos.results[0].key)"
-            allowfullscreen
-          ></b-embed> -->
         <div v-if="movieDetail.videos && movieDetail.videos.results">
           <iframe
           v-if="movieDetail.videos.results[0]"
@@ -77,6 +67,13 @@
           >
           </iframe>
         </div>
+        <div>
+          <!-- 이게 다른페이지를 다녀오면 사라짐 -->
+          <!-- <h2>리뷰</h2>
+          <h2>작성자 :{{ $route.params.review.username }}</h2>
+          <h2>제목 :{{ $route.params.review.title }}</h2>
+          <h2>내용 :{{ $route.params.review.content }}</h2> -->
+        </div>
       </div>
     </div>
   </div>
@@ -85,6 +82,7 @@
 <script>
 import { movieApi } from "../utils/axios"
 import { mapMutations } from "vuex"
+
 export default {
   data() {
     return {
@@ -132,7 +130,6 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 0;
-
   /* filter: grayscale(px); */
 }
 .movie-detail-image::after {

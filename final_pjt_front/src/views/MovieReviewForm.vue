@@ -4,7 +4,6 @@
       <div id="movie-title-container">
         <h3></h3>
         <div class="text-left btn btn-secondary" type="text" style="width:100% ;" id="movieTitle">{{ movieDetail.title }}</div>
-        <!-- <input class="text-left btn btn-secondary" type="text" style="width:100%" id="movieTitle"  autocomplete="off" @keyup="showSuggestion"> -->
       </div>
     <div class="text-left my-3">Review Title</div>
       <div><input class="text-left btn btn-secondary" type="text" style="width:100%" v-model="MovieReview.title"></div>
@@ -22,6 +21,7 @@
     <button class="btn btn-secondary my-3" @click="createReview">submit your review</button>
   </div>
 </template>
+
 <script>
 import axios from 'axios'
 import movies from '@/movies.json'
@@ -100,68 +100,22 @@ export default {
         alert('chose rank')
         return
       }
-      // const movieTitle = `${ movieDetail.title }`
-      // const movieTitle = document.querySelector('#movieTitle').value
-      console.log(movieTitle)
-      // const isContained = this.movies.filter(function(movie) {
-      //   return movie.title=== movieTitle
-      // })
-      // if (isContained.length===0){
-      //   alert('chose right movie title')
-      //   return
-      // }
-      // else {
-      //   this.MovieReview.movie_title = movieTitle
-      // }
+
       this.MovieReview.movie_title = this.movieDetail.title
-      // this.MovieReview.movie_title = document.getElementById('movieTitle').innerHTML
+      
       const movieReview = this.MovieReview
       const config = this.setToken()
       
-      
-      // axios.post(`${SERVER_URL}/detail/${movieDetail.title}/movie_review_list_create/`,movieReview, config)
+      // 이것은 서버와 URL을 연동시켜야함 (SERVER_URL)
       axios.post(`${SERVER_URL}/articles/movie_review_list_create/`,movieReview, config)
       .then(()=>{
-        // 이게 지금 id값을 받아야함
-        this.$router.push({name : "Detail", params: { id: movieDetail.id }})
+        // 저장한 값을 보냄 호출 : $route.params.review
+        this.$router.push({name : "Detail", params: { review: movieReview }})
       })
       .catch((err)=>{
         console.log(err)
       })
-    },
-    // showSuggestion : function (event) {
-    //   const suggestionsContainer = document.querySelector('#movie-title-container')
-    //   if (!document.getElementById("movie-title-suggestions")){
-    //     const tmp = document.createElement('div')
-    //     tmp.setAttribute('id','movie-title-suggestions')
-    //     suggestionsContainer.appendChild(tmp)
-    //   }
-    //   const suggestionsPanel = document.querySelector('#movie-title-suggestions')
-    //   suggestionsPanel.innerHTML = '';
-    //   suggestionsContainer.appendChild(suggestionsPanel)
-    //   const movieTitle = document.querySelector('#movieTitle').value
-    //   const suggestions = this.movies.filter(function(movie) {
-    //     return movie.title.toLowerCase().startsWith(movieTitle)
-    //   })
-    //   suggestions.forEach(function(suggested) {
-    //     const div = document.createElement('div')
-    //     div.setAttribute("class","btn-secondary ghost-button block")
-    //     div.innerHTML = suggested.title
-    //     div.addEventListener("click", function (){
-    //       const movieTitle = document.querySelector('#movieTitle')
-    //       movieTitle.value =  suggested.title
-    //       document.getElementById("movie-title-suggestions").remove()
-    //     })
-    //     div.setAttribute("class","btn-secondary ghost-button block change-cursor")
-    //     suggestionsPanel.appendChild(div)
-    //   })
-    //   if (movieTitle === '') {
-    //     suggestionsPanel.innerHTML = ''
-    //   }
-    //   if (event.key=='Enter'){
-    //     console.log('enter!!!!!!!!')
-    //   }
-    // }
+    }
   }
 }
 </script>
