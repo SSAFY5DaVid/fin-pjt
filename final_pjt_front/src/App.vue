@@ -4,7 +4,7 @@
       <span v-if="isLogin">
         <router-link  to="/">Home</router-link> |
         <router-link to="/search">Search</router-link> |
-        <router-link to="/articles/article_form">Article</router-link> |
+        <router-link to="/articles/article_list">Article</router-link> |
         <router-link to="#" @click.native="onLogout">Logout</router-link> 
       </span>
       <span v-else>

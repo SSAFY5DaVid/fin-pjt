@@ -89,6 +89,8 @@ def articles(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT']) # response 쓸때 해당 decorator 필수
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'GET':

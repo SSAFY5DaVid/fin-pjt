@@ -9,6 +9,8 @@ import Login from '@/views/accounts/Login'
 import ArticleForm from '@/views/articles/ArticleForm'
 import ArticleList from '@/views/articles/ArticleList'
 import ArticleCreated from '@/views/articles/ArticleCreated'
+import ArticleDetail from '@/views/articles/ArticleDetail'
+import ArticleUpdate from '@/views/articles/ArticleUpdate'
 import MovieReviewForm from '@/views/MovieReviewForm'
 import CreateMovieReview from '../views/CreateMovieReview.vue'
 
@@ -64,6 +66,16 @@ const routes = [
     path: '/articles/article_created',
     name: 'ArticleCreated',
     component: ArticleCreated,
+  },
+  {
+    path: '/articles/article_detail',
+    name: 'ArticleDetail',
+    component: ArticleDetail,
+  },
+  {
+    path: '/articles/article_update',
+    name: 'ArticleUpdate',
+    component: ArticleUpdate,
   },
   {
     path: '/detail/:id/movie_review_form',
