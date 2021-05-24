@@ -7,8 +7,69 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication 
 
 from django.shortcuts import render, get_list_or_404, get_object_or_404
-from .models import Article, Comment
-from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
+from .models import Article, Comment, MovieReview
+from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer, MovieReviewSerializer
+from django.db.models import Count
+
+
+@api_view(['GET', 'POST'])
+# @authentication_classes([JSONWebTokenAuthentication])
+# @permission_classes([IsAuthenticated])
+def movie_review_list_create(request):
+    if request.method == 'GET':
+        # movie_reviews = MovieReview.objects.all().order_by('-created_at')
+        movie_reviews = MovieReview.objects.all()
+        serializer = MovieReviewSerializer(movie_reviews, many=True)
+        return Response(serializer.data)
+    else:
+        # print(request.data)
+        serializer = MovieReviewSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def movie_review_list_order_by_like(request):
+    movie_reviews = MovieReview.objects.all().annotate(num_likes=Count('like')).order_by('-num_likes')
+    serializer = MovieReviewSerializer(movie_reviews, many=True)
+    return Response(serializer.data)
+
+@api_view(['PUT', 'DELETE'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def movie_review_update_delete(request, movie_review_pk):
+    movie_review = get_object_or_404(MovieReview, pk=movie_review_pk)
+
+    if not request.user.movie_reviews.filter(pk=movie_review_pk).exists():
+        return Response({'detail': '권한이 없습니다.'})
+    
+    if request.method == 'PUT':
+        serializer = MovieReviewSerializer(movie_review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    else:
+        movie_review.delete()
+        return Response({ 'id': movie_review_pk })
+
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_user_movie_reviews(request, movie_review_pk):
+    movie_review = get_object_or_404(MovieReview, pk=movie_review_pk)
+    serializer = MovieReviewSerializer(movie_review)
+    username = str(movie_review.user)
+    is_review_user=False
+    if username == str(request.user):
+        is_review_user=True
+    newdict={'username':username,'is_review_user':is_review_user}
+    newdict.update(serializer.data)
+    return Response(newdict)
+
 
 # Create your views here.
 @api_view(['GET', 'POST']) # response 쓸때 해당 decorator 필수

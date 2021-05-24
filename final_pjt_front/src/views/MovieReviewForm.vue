@@ -3,8 +3,8 @@
     <div class="text-left my-3">Movie Title</div>
       <div id="movie-title-container">
         <h3></h3>
-        <div class="text-left btn btn-secondary" type="text" style="width:100% ;">{{ movieDetail.title }}</div>
-        <!-- <input class="text-left btn btn-secondary" type="text" style="width:100%" id="movieTitleInput"  autocomplete="off" @keyup="showSuggestion"> -->
+        <div class="text-left btn btn-secondary" type="text" style="width:100% ;" id="movieTitle">{{ movieDetail.title }}</div>
+        <!-- <input class="text-left btn btn-secondary" type="text" style="width:100%" id="movieTitle"  autocomplete="off" @keyup="showSuggestion"> -->
       </div>
     <div class="text-left my-3">Review Title</div>
       <div><input class="text-left btn btn-secondary" type="text" style="width:100%" v-model="MovieReview.title"></div>
@@ -100,22 +100,30 @@ export default {
         alert('chose rank')
         return
       }
-      const movieTitleInput = document.querySelector('#movieTitleInput').value
-      const isContained = this.movies.filter(function(movie) {
-        return movie.title=== movieTitleInput
-      })
-      if (isContained.length===0){
-        alert('chose right movie title')
-        return
-      }
-      else {
-        this.MovieReview.movie_title = movieTitleInput
-      }
-      const config = this.setToken()
+      // const movieTitle = `${ movieDetail.title }`
+      // const movieTitle = document.querySelector('#movieTitle').value
+      console.log(movieTitle)
+      // const isContained = this.movies.filter(function(movie) {
+      //   return movie.title=== movieTitle
+      // })
+      // if (isContained.length===0){
+      //   alert('chose right movie title')
+      //   return
+      // }
+      // else {
+      //   this.MovieReview.movie_title = movieTitle
+      // }
+      this.MovieReview.movie_title = this.movieDetail.title
+      // this.MovieReview.movie_title = document.getElementById('movieTitle').innerHTML
       const movieReview = this.MovieReview
-      axios.post(`${SERVER_URL}/community/movie_review_list_create/`,movieReview, config)
+      const config = this.setToken()
+      
+      
+      // axios.post(`${SERVER_URL}/detail/${movieDetail.title}/movie_review_list_create/`,movieReview, config)
+      axios.post(`${SERVER_URL}/articles/movie_review_list_create/`,movieReview, config)
       .then(()=>{
-        this.$router.push({name : "movie_review_list"})
+        // 이게 지금 id값을 받아야함
+        this.$router.push({name : "Detail", params: { id: movieDetail.id }})
       })
       .catch((err)=>{
         console.log(err)
@@ -131,23 +139,23 @@ export default {
     //   const suggestionsPanel = document.querySelector('#movie-title-suggestions')
     //   suggestionsPanel.innerHTML = '';
     //   suggestionsContainer.appendChild(suggestionsPanel)
-    //   const movieTitleInput = document.querySelector('#movieTitleInput').value
+    //   const movieTitle = document.querySelector('#movieTitle').value
     //   const suggestions = this.movies.filter(function(movie) {
-    //     return movie.title.toLowerCase().startsWith(movieTitleInput)
+    //     return movie.title.toLowerCase().startsWith(movieTitle)
     //   })
     //   suggestions.forEach(function(suggested) {
     //     const div = document.createElement('div')
     //     div.setAttribute("class","btn-secondary ghost-button block")
     //     div.innerHTML = suggested.title
     //     div.addEventListener("click", function (){
-    //       const movieTitleInput = document.querySelector('#movieTitleInput')
-    //       movieTitleInput.value =  suggested.title
+    //       const movieTitle = document.querySelector('#movieTitle')
+    //       movieTitle.value =  suggested.title
     //       document.getElementById("movie-title-suggestions").remove()
     //     })
     //     div.setAttribute("class","btn-secondary ghost-button block change-cursor")
     //     suggestionsPanel.appendChild(div)
     //   })
-    //   if (movieTitleInput === '') {
+    //   if (movieTitle === '') {
     //     suggestionsPanel.innerHTML = ''
     //   }
     //   if (event.key=='Enter'){

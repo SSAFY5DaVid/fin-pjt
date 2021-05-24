@@ -10,6 +10,7 @@ import ArticleForm from '@/views/articles/ArticleForm'
 import ArticleList from '@/views/articles/ArticleList'
 import ArticleCreated from '@/views/articles/ArticleCreated'
 import MovieReviewForm from '@/views/MovieReviewForm'
+import CreateMovieReview from '../views/CreateMovieReview.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     path: "/detail/:id",
     name: "Detail",
     component:MovieDetail
+  },
+  {
+    path: '/detail/create/movie_review',
+    name: 'detail_create_movie_review',
+    component: CreateMovieReview
   },
   {
     path:"/search",

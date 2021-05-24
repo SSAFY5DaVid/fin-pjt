@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Article, Comment
+from .models import Article, Comment, MovieReview
 
 # List 불러올 때 사용하는 Serializer 
 class ArticleListSerializer(serializers.ModelSerializer):
@@ -27,3 +27,13 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = '__all__' 
         read_only_fields = ('user',)
+
+
+class MovieReviewSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = MovieReview
+        # 'like',
+        # fields = ('username','id', 'rank', 'content', 'movie_title', 'title','created_at')
+        fields = '__all__'
+        read_only_fields = ('title','user',)
