@@ -2,12 +2,18 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication 
+
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from .models import Article, Comment
 from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
 
 # Create your views here.
 @api_view(['GET', 'POST']) # response 쓸때 해당 decorator 필수
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def articles(request):
     if request.method == 'GET':
         article_list = get_list_or_404(Article)
@@ -16,7 +22,7 @@ def articles(request):
     else:
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED) # status=201 도 가능
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -6,7 +6,8 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'content' ,'created_at') # 필요한 것만 불러올 수 있음 ('id', 'title')
+        fields = '__all__' # 필요한 것만 불러올 수 있음 ('id', 'title')
+        
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -25,3 +26,4 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__' 
+        read_only_fields = ('user',)
