@@ -67,13 +67,14 @@
           >
           </iframe>
         </div>
-        <div v-if="this.username">
+        <!-- <div v-if ="this.review"> -->
           <!-- 이게 다른페이지를 다녀오면 사라짐 -->
-          <h2>리뷰</h2>
-          <h2>작성자 :{{ $route.params.review.username }}</h2>
-          <h2>제목 :{{ $route.params.review.title }}</h2>
-          <h2>내용 :{{ $route.params.review.content }}</h2>
-        </div>
+        <!-- <h2>리뷰</h2>
+        <h2>id :{{ $route.params.review.movie_id }}</h2>
+        <h2>작성자 :{{ $route.params.review.username }}</h2>
+        <h2>제목 :{{ $route.params.review.title }}</h2>
+        <h2>내용 :{{ $route.params.review.content }}</h2> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>

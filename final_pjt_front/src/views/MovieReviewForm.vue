@@ -39,6 +39,7 @@ export default {
         movie_title : '',
         title : '',
         username : localStorage.getItem('username'),
+        movie_id : 0,
       },
       starStatus : false,
       movies : movies,
@@ -102,7 +103,7 @@ export default {
       }
 
       this.MovieReview.movie_title = this.movieDetail.title
-      
+      this.MovieReview.movie_id = this.movieDetail.id
       const movieReview = this.MovieReview
       const config = this.setToken()
       

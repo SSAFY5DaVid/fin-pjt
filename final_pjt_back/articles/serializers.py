@@ -6,9 +6,10 @@ class MovieReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = MovieReview
         # 'like',
-        fields = ('username','id', 'rank', 'content', 'movie_title', 'title','created_at')
+        fields = ('username','id', 'movie_id', 'rank', 'content', 'movie_title', 'title','created_at')
         # fields = '__all__'
         read_only_fields = ('title',)
+
 
 
 # List 불러올 때 사용하는 Serializer 

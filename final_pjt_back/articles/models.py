@@ -6,6 +6,7 @@ class MovieReview(models.Model):
     like = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name = 'user_like')
     movie_title = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
+    movie_id = models.IntegerField()
     rank = models.IntegerField(default=1)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
