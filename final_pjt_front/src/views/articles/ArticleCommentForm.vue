@@ -14,7 +14,6 @@ export default {
     return {
       comment : {
         content : '',
-        username : localStorage.getItem('username'),
       }
     }
   },
@@ -33,7 +32,7 @@ export default {
     },
     createComment : function () {
       const config = this.setToken()
-      axios.post(`${SERVER_URL}/community/post_comment_create/${this.review_id}/`,this.comment,config)
+      axios.post(`${SERVER_URL}/articles/${this.review_id}/comments/`,this.comment,config)
       .then((res)=>{
         console.log(res)
         this.$router.go(this.$router.currentRoute)

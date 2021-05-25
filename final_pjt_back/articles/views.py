@@ -39,6 +39,7 @@ def movie_review_list_order_by_like(request):
     serializer = MovieReviewSerializer(movie_reviews, many=True)
     return Response(serializer.data)
 
+
 @api_view(['PUT', 'DELETE'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -56,6 +57,7 @@ def movie_review_update_delete(request, movie_review_pk):
     else:
         movie_review.delete()
         return Response({ 'id': movie_review_pk })
+
 
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
@@ -111,14 +113,20 @@ def article_detail(request, pk):
         return Response(response, status=status.HTTP_204_NO_CONTENT)
 
 
+
 @api_view(['GET', 'POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def comments(request):
     comment_list = get_list_or_404(Comment)
     serializer = CommentSerializer(comment_list, many=True)
     return Response(serializer.data)
 
 
+
 @api_view(['GET','DELETE']) # response 쓸때 해당 decorator 필수
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def comment_detail(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'GET':
@@ -126,11 +134,14 @@ def comment_detail(request, pk):
         return Response(serializer.data)
     else:
         comment.delete()
-        response = {'pk':pk}
-        return Response(response, status=status.HTTP_404_NOT_FOUND)
+        return Response({ 'id': pk })
+
     
 
+
 @api_view(['GET','POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def article_comments(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     if request.method == 'GET':
@@ -140,7 +151,7 @@ def article_comments(request, article_pk):
     else:
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(article=article)
+            serializer.save(article=article, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

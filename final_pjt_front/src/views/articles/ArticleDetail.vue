@@ -12,9 +12,9 @@
       <br>
       <h2> 내용 : {{review.content}} </h2>
 
-      <!-- <div class="m-3"><PostLike :review_id="review_id"/></div>
-      <PostCommentForm :review_id="review_id"/>
-      <PostComment :review_id="review_id"/> -->
+      <!-- <div class="m-3"><PostLike :review_id="review_id"/></div> -->
+      <ArticleComment :review_id="review_id"/>
+      <ArticleCommentForm :review_id="review_id"/>
     </div>
 
     <div><ArticleList /></div>
@@ -40,9 +40,9 @@ export default {
   },
   components : {
     ArticleList,
-    // PostComment,
-    // PostCommentForm,
-    // PostList,
+    ArticleComment,  
+    ArticleCommentForm,
+
   },
   methods : {
     setToken : function () {
