@@ -37,17 +37,27 @@ export default {
     }
   },
   methods: {
+    setToken : function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers : {
+          Authorization : `JWT ${token}`,
+        }
+      }
+      return config
+    },
     login: function () {
-      axios({
-        method: 'POST',
-        url: SERVER_URL + '/accounts/api-token-auth/',
-        data: this.credentials,
-      }).then(res => {
-        localStorage.setItem('jwt', res.data.token)
-        this.$emit('login')
-        this.$router.push({ name: 'Home'})
-      }).catch(err => {
-        console.log(err)
+      axios.post(`${SERVER_URL}/accounts/api-token-auth/`, this.credentials)
+      .then((res) => {
+        localStorage.setItem('jwt',res.data.token)
+        const config = this.setToken()
+        axios.get(`${SERVER_URL}/accounts/username/`,config)
+        .then((res)=>{
+          localStorage.setItem('username',res.data.username)
+          localStorage.setItem('user_id',res.data.user_id) 
+          this.$emit('login')
+          this.$router.push({ name: 'Home'})
+        })
       })
     }
   },

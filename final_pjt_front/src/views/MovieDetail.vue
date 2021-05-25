@@ -67,27 +67,33 @@
           >
           </iframe>
         </div>
-        <!-- <div v-if ="this.review"> -->
-          <!-- 이게 다른페이지를 다녀오면 사라짐 -->
-        <!-- <h2>리뷰</h2>
-        <h2>id :{{ $route.params.review.movie_id }}</h2>
-        <h2>작성자 :{{ $route.params.review.username }}</h2>
-        <h2>제목 :{{ $route.params.review.title }}</h2>
-        <h2>내용 :{{ $route.params.review.content }}</h2> -->
-        <!-- </div> -->
+        <div  v-for="review in Reviews" :key="review.id">
+          <div v-if="movieDetail.id===review.movie_id">
+            <!-- 이게 다른페이지를 다녀오면 사라짐 -->
+            <h2>작성자 :{{ review.username }}</h2>
+            <h2>제목 :{{ review.title }}</h2>
+            <h2>내용 :{{ review.content }}</h2> 
+            <h2>평점 :{{getStar(review.rank)}}</h2> 
+            <button @click="onDelete(review)">X</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { movieApi } from "../utils/axios"
 import { mapMutations } from "vuex"
+
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   data() {
     return {
       movieDetail: {},
+      Reviews : [],
     }
   },
   async mounted() {
@@ -111,7 +117,43 @@ export default {
     youtube(src) {
       return `https://www.youtube.com/embed/${src}`
     },
+    setToken : function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers : {
+          Authorization : `JWT ${token}`,
+        }
+      }
+      return config
+    },
+    getStar (rank) {
+      let rankStar = '★'
+      for (let i=1;i<rank;i++){
+        rankStar += '★'
+      }
+      return rankStar
+    },
+    onDelete : function (review) {
+      const config = this.setToken()
+      axios.delete(`${SERVER_URL}/articles/movie_review_update_delete/${review.id}/`,config)
+      .then(()=>{
+      this.$router.go(this.$router.currentRoute)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
   },
+  created: function () {
+    const config = this.setToken()
+    axios.get(`${SERVER_URL}/articles/movie_review_list_create/`,config)
+    .then((res)=>{  
+      this.Reviews = res.data
+      })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
 }
 </script>
 }

@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
 
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication 
+
 # model의 User class를 말함
 User = get_user_model()
 
@@ -28,3 +32,14 @@ def signup(request):
         user.save()
     # password는 직렬화 과정에는 포함 되지만 → 표현(response)할 때는 나타나지 않는다.
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def username(request):
+    new_dict = {
+        'username' : request.user.username,
+        'user_id' : request.user.id, 
+        }
+    return Response(new_dict)

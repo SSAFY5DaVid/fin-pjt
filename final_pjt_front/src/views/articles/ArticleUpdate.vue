@@ -17,6 +17,7 @@ export default {
       Article : {
         content : this.$route.params.review.content,
         title : this.$route.params.review.title,
+        username : this.$route.params.review.username,
       }
     }
   },

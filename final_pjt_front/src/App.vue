@@ -35,6 +35,9 @@ export default {
     },
     onLogout: function () {
       localStorage.removeItem('jwt')
+      localStorage.removeItem('jwt')
+      localStorage.removeItem('username')
+      localStorage.removeItem('user')
       this.isLogin = false
       this.$router.push({ name: 'Login'})
     }

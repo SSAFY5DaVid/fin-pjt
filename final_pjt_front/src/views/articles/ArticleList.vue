@@ -9,12 +9,14 @@
       <div class="d-flex row row mt-2 mb-4">
         <div class="col-4 article-title">제목</div>
         <div class="col-4 article-content">내용</div> 
+        <div class="col-2 post-username">작성자</div>
         <div class="col-2" >작성일</div>       
       </div>
       <div v-for="review in Posts" :key="review.id">
         <div class="row d-flex mb-2" @click="onClick(review)">
           <div class="col-4 article-title">{{review.title}}</div>
           <div class="col-4 article-content">{{review.content}}</div> 
+          <div class="col-2 post-username">{{review.username}} </div>
           <div class="col-2">{{ getCreatedAt(review) }}</div>
         </div>
       </div>

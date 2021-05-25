@@ -1,7 +1,7 @@
 <template>
   <div class="container text-left" style="margin-top:10%">
     <div style="min-height:70vh;">
-      <span >
+      <span v-if="me==review.username">
         <button class="btn btn-secondary ghost-button" @click="goUpdate(review)">수정하기</button>
         <button  class="btn btn-secondary ghost-button" @click="onDelete(review.id)">삭제하기</button>
       </span>
@@ -36,6 +36,7 @@ export default {
       review_id : this.$route.query.review_id,
       update_delete : false,
       review : '',
+      me : localStorage.getItem('username')
     }
   },
   components : {
@@ -79,7 +80,7 @@ export default {
         title  : res.data.title,
         content : res.data.content,
         id : res.data.id,
-        user : res.data.user,
+        username : res.data.username,
       }
       this.username = res.data.username
       if(res.data.is_review_user){

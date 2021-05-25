@@ -14,6 +14,7 @@ export default {
     return {
       comment : {
         content : '',
+        username : localStorage.getItem('username'),
       }
     }
   },

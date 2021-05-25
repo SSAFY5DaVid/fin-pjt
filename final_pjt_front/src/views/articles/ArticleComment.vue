@@ -1,10 +1,13 @@
 <template>
   <div>
     <div class="d-flex " v-for="comment in comments" :key="comment.id">
+      <h4 class="align-self-center mr-3">
+        {{comment.username}} 
+      </h4>
       <h4 class="align-self-center">
         {{comment.content}}
       </h4>
-      <button class="btn btn-secondary ghost-button" style="font-size : 30px"  @click="deleteComment(comment.id)">x</button>
+      <button class="btn btn-secondary ghost-button" style="font-size : 30px" v-if="me==comment.username"  @click="deleteComment(comment.id)">x</button>
     </div>
   </div>
 </template>
@@ -17,6 +20,7 @@ export default {
   data : function () {
     return {
       comments : [],
+      me : localStorage.getItem('username')
     }
   },
   props : {
