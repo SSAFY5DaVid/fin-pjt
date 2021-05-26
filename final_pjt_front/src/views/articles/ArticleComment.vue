@@ -2,12 +2,12 @@
   <div>
     <div class="d-flex " v-for="comment in comments" :key="comment.id">
       <h4 class="align-self-center mr-3">
-        {{comment.username}} 
+        {{comment.username}} |
       </h4>
       <h4 class="align-self-center">
         {{comment.content}}
+        <button class="btn btn-secondary ghost-button" style="font-size : 30px" v-if="me==comment.username"  @click="deleteComment(comment.id)">X</button>
       </h4>
-      <button class="btn btn-secondary ghost-button" style="font-size : 30px" v-if="me==comment.username"  @click="deleteComment(comment.id)">x</button>
     </div>
   </div>
 </template>

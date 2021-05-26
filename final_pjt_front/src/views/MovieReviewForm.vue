@@ -24,7 +24,6 @@
 
 <script>
 import axios from 'axios'
-// import movies from '@/movies.json'
 import { movieApi } from "../utils/axios"
 import { mapMutations } from "vuex"
 
@@ -42,7 +41,6 @@ export default {
         movie_id : 0,
       },
       starStatus : false,
-      // movies : movies,
       movieDetail: {},
     }
   },

@@ -54,7 +54,7 @@ export default {
   },
   created: function () {
     if (this.isLogin) {
-      this.$router.push({ name: 'Home'})
+      this.$router.push({ name: 'Main'})
     }
   },
 }

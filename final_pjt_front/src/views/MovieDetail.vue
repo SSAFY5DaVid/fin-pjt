@@ -109,7 +109,7 @@
               <div class="col-2 post-username">{{ review.username }} </div>
               <div class="col-2">{{ getStar(review.rank) }}</div>
               <span v-if="me==review.username">
-                <button @click="onDelete(review)">X</button>
+                <button class="btn btn-secondary ghost-button" @click="onDelete(review)">X</button>
               </span>
               <hr>
             </div>

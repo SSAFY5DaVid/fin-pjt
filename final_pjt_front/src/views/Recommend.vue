@@ -14,7 +14,6 @@
         <div class="card h-100">
           <img :src="movie.fields.poster_path" class="card-img" style="object-fit: cover;">
           <div class="card-body">
-            <!-- <a :href="`http://127.0.0.1:8000/posts/${movie.pk}/`" class="text-decoration-none"><h6 class="card-title fw-bold">{{ movie.fields.title }}</h6></a> -->
             <h6 class="card-title fw-bold text-truncate">{{ movie.fields.title }}</h6>
             <p class="card-text">평점 : {{ movie.fields.vote_average }}</p>
           </div>
@@ -73,8 +72,6 @@ export default {
 .recommend-box {
   position: relative;
   width : 100%;
-  /* min-height: 90vh; */
-  /* display: flex; */
   justify-content: center;
   align-items:center;
   overflow: hidden;

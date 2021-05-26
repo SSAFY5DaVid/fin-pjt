@@ -56,14 +56,14 @@ export default {
           localStorage.setItem('username',res.data.username)
           localStorage.setItem('user_id',res.data.user_id) 
           this.$emit('login')
-          this.$router.push({ name: 'Home'})
+          this.$router.push({ name: 'Main'})
         })
       })
     }
   },
   created: function () {
     if (this.isLogin) {
-      this.$router.push({ name: 'Home'})
+      this.$router.push({ name: 'Main'})
     }
   },
 }

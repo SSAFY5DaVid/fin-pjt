@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const DOMAIN = "https://api.themoviedb.org/3/";
-
+const API_KEY = process.env.VUE_APP_THEMOVIEDB_API_KEY
 const request = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   params: {
-    api_key: "cb772a50acc4cd6917b12854484b9d91",
+    api_key: API_KEY,
     language: "ko-KR",
   },
 });

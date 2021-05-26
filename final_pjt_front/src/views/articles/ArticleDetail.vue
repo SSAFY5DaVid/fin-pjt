@@ -11,14 +11,15 @@
         </span>
       </div>
       <div class="article-overview rounded container mb-4 bg-light">
-        <h1> 제목 : {{review.title}} </h1>
+        <h2> 제목 : {{review.title}} </h2>
         <hr>
-        <h2> 내용 </h2>
         <h3> {{review.content}} </h3>
       </div>
       <div class="row d-flex mb-2">
-        <div class="col-1 article-title">-></div>
-        <div class="col-10 article-review rounded mb-4 bg-secondary">
+        <div class="col-1">
+          <b-icon icon="arrow-return-right" style="width: 80px; height: 80px;"></b-icon>
+        </div>
+        <div class="col-10 article-review rounded ml-4 bg-secondary">
           <ArticleComment :review_id="review_id"/>
         </div>
       </div>
@@ -112,4 +113,5 @@ export default {
   padding: 0px 0px;
   opacity: 0.75;
 }
+
 </style>

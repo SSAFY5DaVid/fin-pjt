@@ -64,8 +64,8 @@ export default {
 <style>
 .movie-card {
   margin: 12px;
-  width: 125px;
-  font-size: 12px;
+  width: 200;
+  font-size: 20px;
   font-weight: 400;
 }
 .movie-card:hover {
