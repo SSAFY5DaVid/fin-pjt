@@ -12,7 +12,7 @@
       </div>
       <div v-for="review in Posts" :key="review.id">
         <div class="row d-flex mb-2" @click="onClick(review)">
-          <div class="col-2 article-title">{{ review.title }}</div>
+          <div class="col-2 article-title text-truncate">{{ review.title }}</div>
           <div class="col-4 article-content">{{ review.content }}</div> 
           <div class="col-2 post-username">{{ review.username }} </div>
           <div class="col-2">{{ getCreatedAt(review) }}</div>

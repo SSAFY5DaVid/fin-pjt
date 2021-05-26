@@ -1,24 +1,28 @@
 <template>
-  <div >
-    <select v-model="mode" class="form-select mb-4" style="width:30%">
+  <div class="recommend-box d-flex flex-column">
+    
+    <!-- 추천 사항 -->
+    <select v-model="mode" class="btn btn-light border d-flex justify-content-start form-select mb-4" style="width:30%">
       <option value="latest">최신 영화 추천</option>
       <option value="popular">인기 영화 추천</option>
       <option value="vote">평점순 영화 추천</option>
     </select>
     
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col mt-3 mb-3" v-for="(movie, index) in movieList" :key="index">
+    <!-- 영화 리스트 -->
+    <div class="container row row-cols-1 row-cols-md-3 g-4">
+      <div class="col mt-3 mb-5" v-for="(movie, index) in movieList" :key="index">
         <div class="card h-100">
-          <img :src="movie.fields.poster_path" class="card-img-top h-100" style="object-fit: cover;">
+          <img :src="movie.fields.poster_path" class="card-img" style="object-fit: cover;">
           <div class="card-body">
-            <a :href="`http://127.0.0.1:8000/posts/${movie.pk}/`" class="text-decoration-none"><h6 class="card-title fw-bold">{{ movie.fields.title }}</h6></a>
+            <!-- <a :href="`http://127.0.0.1:8000/posts/${movie.pk}/`" class="text-decoration-none"><h6 class="card-title fw-bold">{{ movie.fields.title }}</h6></a> -->
+            <h6 class="card-title fw-bold text-truncate">{{ movie.fields.title }}</h6>
             <p class="card-text">평점 : {{ movie.fields.vote_average }}</p>
           </div>
         </div>
       </div>
     </div>
-    </div>
-  </template>
+  </div>
+</template>
 
 <script>
 import axios from 'axios'
@@ -66,5 +70,18 @@ export default {
 </script>
 
 <style>
-
+.recommend-box {
+  position: relative;
+  width : 100%;
+  /* min-height: 90vh; */
+  /* display: flex; */
+  justify-content: center;
+  align-items:center;
+  overflow: hidden;
+  padding: 100px;
+}
+.card-img{
+  width:125px;
+  height:600px;
+}
 </style>
