@@ -1,19 +1,29 @@
 <template>
   <div class="container text-left" style="margin-top:10%">
     <div style="min-height:70vh;">
-      <span v-if="me==review.username">
-        <button class="btn btn-secondary ghost-button" @click="goUpdate(review)">수정하기</button>
-        <button  class="btn btn-secondary ghost-button" @click="onDelete(review.id)">삭제하기</button>
-      </span>
-      <span >
-        <button class="btn btn-secondary ghost-button" @click="goBack(review)">뒤로가기</button>
-      </span>
-      <h1> 제목 : {{review.title}} </h1>
-      <br>
-      <h2> 내용 : {{review.content}} </h2>
-
+      <div class="edit-btn mb-4 d-flex justify-content-end">
+        <span v-if="me==review.username">
+          <button class="btn btn-secondary ghost-button ml-2" @click="goUpdate(review)">수정하기</button>
+          <button  class="btn btn-secondary ghost-button ml-2" @click="onDelete(review.id)">삭제하기</button>
+        </span>
+        <span >
+          <button class="btn btn-secondary ghost-button ml-2" @click="goBack(review)">뒤로가기</button>
+        </span>
+      </div>
+      <div class="article-overview rounded container mb-4 bg-light">
+        <h1> 제목 : {{review.title}} </h1>
+        <hr>
+        <h2> 내용 </h2>
+        <h3> {{review.content}} </h3>
+      </div>
       <!-- <div class="m-3"><PostLike :review_id="review_id"/></div> -->
-      <ArticleComment :review_id="review_id"/>
+      <div class="row d-flex mb-2">
+        <div class="col-1 article-title">-></div>
+        <div class="col-10 article-review rounded mb-4 bg-secondary">
+          <ArticleComment :review_id="review_id"/>
+        </div>
+      </div>
+      
       <ArticleCommentForm :review_id="review_id"/>
     </div>
 
@@ -92,5 +102,15 @@ export default {
 </script>
 
 <style>
-
+.btn {
+  padding: 10px 10px;
+}
+.article-overview {
+  padding: 10px 0px;
+  opacity: 0.95;
+}
+.article-review {
+  padding: 0px 0px;
+  opacity: 0.75;
+}
 </style>

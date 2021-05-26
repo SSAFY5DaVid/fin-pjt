@@ -9,9 +9,12 @@
     
     <div class="movie-content d-flex flex-column">
       
+      <!-- 1번칸 -->
       <div class="box1 d-flex">
+        <!-- 영화 설명 -->
         <div class="ml-2 mr-2 w-75 rounded-lg" >
           <h1 class="movie-title ml-4 mb-4">{{ movieDetail.title }}</h1>
+          <!-- 영화 정보 -->
           <div class="movie-information-wrapper mt-4 d-flex align-items-center">
             <div>{{ movieDetail.release_date.split("-")[0] }}</div>
             <span class="ml-1">ㆍ</span>
@@ -49,6 +52,7 @@
                 /></svg
             ></a>
           </div>
+          <!-- 줄거리 요약 -->
           <div class="movie-overview mt-3">{{ movieDetail.overview }}</div>
         </div>
 
@@ -62,8 +66,9 @@
 
       </div>
       <hr>
-      <!-- Youtube -->
+      <!-- 2번칸 -->
       <div class = 'box2'>
+        <!-- Youtube -->
         <div v-if="movieDetail.videos && movieDetail.videos.results">
           <iframe 
           v-if="movieDetail.videos.results[0]"
@@ -79,22 +84,42 @@
         </div>
       </div>
 
-      <!-- Review -->
+      <!-- 3번칸 -->
       <div class = 'box3'>
+        <!-- Review -->
         <div class="review-btn">
           <router-link 
             class="btn btn-secondary ghost-button" 
             :to="`/detail/${movieDetail.id}/movie_review_form`"
           >리뷰 작성</router-link>
         </div>
-        <div  v-for="review in Reviews" :key="review.id">
+        <!-- <div  v-for="review in Reviews" :key="review.id">
           <div v-if="movieDetail.id===review.movie_id">
-            <!-- 이게 다른페이지를 다녀오면 사라짐 -->
             <h2>작성자 :{{ review.username }}</h2>
             <h2>제목 :{{ review.title }}</h2>
             <h2>내용 :{{ review.content }}</h2> 
             <h2>평점 :{{getStar(review.rank)}}</h2> 
             <button @click="onDelete(review)">X</button>
+          </div>
+        </div> -->
+        <div class="review-list rounded container text-left bg-white">
+          <div class="d-flex mt-2 mb-4">
+            <div class="col-2 review-title">제목</div>
+            <div class="col-4 review-content">내용</div> 
+            <div class="col-2 post-username">작성자</div>
+            <div class="col-2" >평점</div>
+            <div class="col-2" >비고</div> 
+          </div>
+          <hr>
+          <div v-for="review in Reviews" :key="review.id">
+            <div class="row d-flex mb-2" v-if="movieDetail.id===review.movie_id">
+              <div class="col-2 review-title">{{ review.title }}</div>
+              <div class="col-4 review-content">{{ review.content }}</div> 
+              <div class="col-2 post-username">{{ review.username }} </div>
+              <div class="col-2">{{ getStar(review.rank) }}</div>
+              <button @click="onDelete(review)">X</button>
+              <hr>
+            </div>
           </div>
         </div>
       </div>
@@ -180,8 +205,8 @@ export default {
 }
 
 <style>
+/* 뒷 배경 */
 .movie-detail {
-  /* z-index: 99; */
   position: relative;
   padding: 40px 40px;
 }
@@ -209,13 +234,11 @@ export default {
   display: block;
 }
 
+/* 본문 */
 .movie-content {
   position: relative;
-  z-index: 999;
+  /* z-index: 999; */
   padding: 100px 0px;
-}
-.review-btn {
-  padding: 10px 0px;
 }
 .movie-title {
   margin-left: 5px;
@@ -238,16 +261,19 @@ export default {
   font-size: 20px;
 }
 .movie-overview {
-  max-width: 65%;
+  max-width: 90%;
   font-size: 19px;
   color: #141414dd;
 }
 .homepage-link:hover {
-  opacity: 0.5;
-}
-/* .aa {
-  min-height: 100vh;
-  background-color: rgb(40, 40, 40);
   opacity: 0.8;
-} */
+}
+.review-btn {
+  padding: 10px 0px;
+}
+.review-list {
+  padding: 10px 0px;
+  opacity: 0.8;
+}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
-    <input  class="btn btn-secondary comment-form mb-2" type="text" v-model="comment.content" @keypress.enter="createComment">
-    <button  class="btn btn-secondary ghost-button mx-3" @click="createComment">COMMENT</button>
+    <input  class="btn btn-secondary comment-form" type="text" v-model="comment.content" @keypress.enter="createComment">
+    <button  class="btn btn-secondary ghost-button mx-4" @click="createComment">COMMENT</button>
   </div>
 </template>
 
@@ -48,5 +48,7 @@ export default {
 </script>
 
 <style>
-
+.comment-form {
+  min-width: 5%;
+}
 </style>

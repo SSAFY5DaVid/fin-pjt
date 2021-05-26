@@ -1,22 +1,20 @@
 <template>
-  <div style="margin-top:10%">
-    <div class="container d-flex justify-content-between">
-      <div>
-        <router-link class="btn btn-secondary ghost-button" to="/articles/article_form">글쓰기</router-link>
-      </div> 
+  <div class="container" style="margin-top:10%">
+    <div class="post-btn d-flex justify-content-between">
+      <router-link class="btn btn-secondary ghost-button" to="/articles/article_form">글쓰기</router-link>
     </div>
-    <div class="container text-left">
+    <div class="article-list rounded container text-left bg-light">
       <div class="d-flex row row mt-2 mb-4">
-        <div class="col-4 article-title">제목</div>
+        <div class="col-2 article-title">제목</div>
         <div class="col-4 article-content">내용</div> 
         <div class="col-2 post-username">작성자</div>
         <div class="col-2" >작성일</div>       
       </div>
       <div v-for="review in Posts" :key="review.id">
         <div class="row d-flex mb-2" @click="onClick(review)">
-          <div class="col-4 article-title">{{review.title}}</div>
-          <div class="col-4 article-content">{{review.content}}</div> 
-          <div class="col-2 post-username">{{review.username}} </div>
+          <div class="col-2 article-title">{{ review.title }}</div>
+          <div class="col-4 article-content">{{ review.content }}</div> 
+          <div class="col-2 post-username">{{ review.username }} </div>
           <div class="col-2">{{ getCreatedAt(review) }}</div>
         </div>
       </div>
@@ -69,6 +67,13 @@ export default {
 </script>
 
 <style>
+.article-list {
+  padding: 10px 0px;
+  opacity: 0.95;
+}
+.post-btn {
+  padding: 10px 0px;
+}
 .post-title {
   white-space: nowrap;
   overflow: hidden;

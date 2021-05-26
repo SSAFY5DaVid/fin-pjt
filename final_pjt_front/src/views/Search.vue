@@ -1,5 +1,5 @@
 <template>
-  <div class="search-box">
+  <div class="container search-box">
     <h1>Search</h1>
     <div>
       <b-form @submit.prevent="onSearch">
