@@ -9,9 +9,6 @@ class MovieReviewSerializer(serializers.ModelSerializer):
         fields = ('username','id','movie_id', 'rank', 'content', 'movie_title', 'title','created_at')
 
 
-
-
-
 # List 불러올 때 사용하는 Serializer 
 class ArticleListSerializer(serializers.ModelSerializer):
 
@@ -19,7 +16,6 @@ class ArticleListSerializer(serializers.ModelSerializer):
         model = Article
         fields = '__all__'
         
-
 
 class CommentSerializer(serializers.ModelSerializer):
 

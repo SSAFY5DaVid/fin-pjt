@@ -16,7 +16,6 @@
         <h2> 내용 </h2>
         <h3> {{review.content}} </h3>
       </div>
-      <!-- <div class="m-3"><PostLike :review_id="review_id"/></div> -->
       <div class="row d-flex mb-2">
         <div class="col-1 article-title">-></div>
         <div class="col-10 article-review rounded mb-4 bg-secondary">

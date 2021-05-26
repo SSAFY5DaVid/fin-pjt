@@ -4,7 +4,6 @@
     <div>
       <b-form @submit.prevent="onSearch">
           <b-form-input class="btn btn-secondary search-form my-3" v-model="keyword" placeholder="영화 제목을 입력하세요."></b-form-input>
-        <!-- <input class="search-input" v-model="keyword" /> -->
       </b-form>
     </div>
     <MovieText v-if="movieList" :text="'Search Result'"></MovieText>
@@ -62,8 +61,6 @@ export default {
 .search-box {
   position: relative;
   width : 100%;
-  /* min-height: 90vh; */
-  /* display: flex; */
   justify-content: center;
   align-items:center;
   overflow: hidden;

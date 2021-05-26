@@ -93,15 +93,6 @@
             :to="`/detail/${movieDetail.id}/movie_review_form`"
           >리뷰 작성</router-link>
         </div>
-        <!-- <div  v-for="review in Reviews" :key="review.id">
-          <div v-if="movieDetail.id===review.movie_id">
-            <h2>작성자 :{{ review.username }}</h2>
-            <h2>제목 :{{ review.title }}</h2>
-            <h2>내용 :{{ review.content }}</h2> 
-            <h2>평점 :{{getStar(review.rank)}}</h2> 
-            <button @click="onDelete(review)">X</button>
-          </div>
-        </div> -->
         <div class="review-list rounded container text-left bg-white">
           <div class="d-flex mt-2 mb-4">
             <div class="col-2 review-title">제목</div>
@@ -117,7 +108,9 @@
               <div class="col-4 review-content">{{ review.content }}</div> 
               <div class="col-2 post-username">{{ review.username }} </div>
               <div class="col-2">{{ getStar(review.rank) }}</div>
-              <button @click="onDelete(review)">X</button>
+              <span v-if="me==review.username">
+                <button @click="onDelete(review)">X</button>
+              </span>
               <hr>
             </div>
           </div>
@@ -140,6 +133,7 @@ export default {
     return {
       movieDetail: {},
       Reviews : [],
+      me : localStorage.getItem('username')
     }
   },
   async mounted() {
@@ -181,7 +175,7 @@ export default {
     },
     onDelete : function (review) {
       const config = this.setToken()
-      axios.delete(`${SERVER_URL}/articles/movie_review_update_delete/${review.id}/`,config)
+      axios.delete(`${SERVER_URL}/articles/movie_review_delete/${review.id}/`,config)
       .then(()=>{
       this.$router.go(this.$router.currentRoute)
       })

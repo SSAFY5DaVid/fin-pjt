@@ -2,20 +2,11 @@
   <div>
     <div class="d-flex flex-wrap" v-if="movieList">
       <MovieListsVuex></MovieListsVuex>
-      <!-- <div
-        class="movie-card"
-        style="width:125px;"
-        v-for="li in movieList"
-        :key="li.id"
-      >
-        <movie-card :li="li" :image="image"></movie-card>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-// import MovieCard from "../components/MovieCard"
 import MovieListsVuex from "../components/MovieListsVuex"
 import { movieApi } from "../utils/axios"
 import { mapMutations } from "vuex"
@@ -26,14 +17,10 @@ export default {
     }
   },
   components: {
-    // MovieCard,
     MovieListsVuex,
   },
   methods: {
     ...mapMutations(["SET_LOADING", "SET_NOW_PLAYING", "SET_POPULAR", "SET_UP_COMING"]),
-    // image(img) {
-    //   return `https://image.tmdb.org/t/p/w300/${img}`
-    // },
   },
   created() {
     this.SET_LOADING(true)
@@ -44,7 +31,6 @@ export default {
       const { data } = await movieApi.nowPlaying()
       this.SET_LOADING(false)
       console.log(data.results)
-      // this.movieList = data.results
       this.SET_NOW_PLAYING(data.results)
 
       const { nowPlaying, popular, upComing } = movieApi

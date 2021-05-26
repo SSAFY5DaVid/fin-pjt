@@ -4,20 +4,14 @@
       <div class="h4 ml-3 mt-5 mb-4">Now Playing</div>
       <MovieLists :movieList="nowPlaying"></MovieLists>
       <MovieText :text="'Popular'"></MovieText>
-      <!-- <div class="h4 ml-3 mt-5 mb-4">Popular</div> -->
       <MovieLists :movieList="popular"></MovieLists>
-      <!-- <div class="h4 ml-3 mt-5 mb-4 text-white">Comming Soon</div> -->
       <MovieText :text="'Comming Soon'"></MovieText>
-      <!-- <div class="h4 ml-3 mt-5 mb-4">Comming Soon</div> -->
       <MovieLists :movieList="upComming"></MovieLists>
-      <!-- <MovieLists :movieList="movieList"></MovieLists> -->
-      
     </div>
   </div>
 </template>
 
 <script>
-// import MovieCard from "../components/MovieCard"
 import MovieLists from "../components/MovieLists"
 import MovieText from "../components/MovieText"
 import { movieApi } from "../utils/axios"
@@ -31,15 +25,13 @@ export default {
     };
   },
   components: {
-    // MovieCard,
+
     MovieText,
     MovieLists,
   },
   methods: {
     ...mapMutations(["SET_LOADING"]),
-    // image(img) {
-    //   return `https://image.tmdb.org/t/p/w300/${img}`
-    // },
+
   },
   
   created() {

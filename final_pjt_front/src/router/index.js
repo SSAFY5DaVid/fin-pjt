@@ -12,20 +12,20 @@ import ArticleCreated from '@/views/articles/ArticleCreated'
 import ArticleDetail from '@/views/articles/ArticleDetail'
 import ArticleUpdate from '@/views/articles/ArticleUpdate'
 import MovieReviewForm from '@/views/MovieReviewForm'
-import CreateMovieReview from '../views/CreateMovieReview.vue'
-import Recommend from '../views/Recommend.vue'
+import CreateMovieReview from '@/views/CreateMovieReview.vue'
+import Recommend from '@/views/Recommend.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "Main",
     component: Main,
   },
   {
     path: "/mainvuex",
-    name: "Main",
+    name: "MainVuex",
     component: MainVuex,
   },
   {
@@ -35,8 +35,13 @@ const routes = [
   },
   {
     path: '/detail/create/movie_review',
-    name: 'detail_create_movie_review',
+    name: 'CreateMovieReview',
     component: CreateMovieReview
+  },
+  {
+    path: '/detail/:id/movie_review_form',
+    name: 'MovieReviewForm',
+    component: MovieReviewForm,
   },
   {
     path:"/search",
@@ -77,11 +82,6 @@ const routes = [
     path: '/articles/article_update',
     name: 'ArticleUpdate',
     component: ArticleUpdate,
-  },
-  {
-    path: '/detail/:id/movie_review_form',
-    name: 'movie_review_form',
-    component: MovieReviewForm,
   },
   {
     path: '/recommend',

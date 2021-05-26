@@ -65,7 +65,6 @@ div {
 }
 #app {
   background-color: rgb(255, 255, 255);
-  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -76,7 +75,6 @@ div {
 #nav {
   text-align: center;
   padding: 20px;
-  /* position: relative; */
   z-index: 99;
   background-color: rgb(241, 241, 241);
 }
@@ -89,10 +87,5 @@ div {
 #nav a.router-link-exact-active {
   color: #7e3371;
 }
-/* .router-link-active {
-  color: white !important;
-} */
-/* .router-link-exact-active {
-  color: rgb(5, 5, 5) !important;
-} */
+
 </style>

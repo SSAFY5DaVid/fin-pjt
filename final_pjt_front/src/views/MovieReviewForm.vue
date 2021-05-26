@@ -52,11 +52,9 @@ export default {
     console.log(this.$route.params.id)
     const { id } = this.$route.params
     const { data } = await movieApi.movieDetail(id)
-    // axios 요청 보내기
     console.log(data)
     this.movieDetail = data
     this.SET_LOADING(false)
-    // backdro
   },
   methods : {
     ...mapMutations(["SET_LOADING"]),

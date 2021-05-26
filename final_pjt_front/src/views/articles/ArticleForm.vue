@@ -41,25 +41,6 @@ export default {
           console.log(err)
         })
     }
-    // setToken : function () {
-    //   const token = localStorage.getItem('jwt')
-    //   const config = {
-    //     headers : {
-    //       Authorization : `JWT ${token}`,
-    //     }
-    //   }
-    //   return config
-    // },
-    // onArticle : function () {
-    //   axios.post(`${SERVER_URL}/articles/`,this.Article,this.setToken())
-    //   .then((res)=>{
-    //     console.log(res)
-    //     this.$router.push({name : "ArticleList"})
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-    // }
   }   
 }
 </script>

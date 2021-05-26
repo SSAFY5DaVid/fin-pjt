@@ -21,11 +21,8 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 def recommended(request):
     mode = request.GET.get('mode')
     key = 'popularity' if mode == 'popular' else 'release_date' if mode == 'latest' else 'vote_average'
-    
     movies = Post.objects.order_by(f'-{key}')[:10]
-
     data = serializers.serialize('json', movies)
-    
     return HttpResponse(data, content_type='application/json')
         
 
