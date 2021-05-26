@@ -182,8 +182,8 @@ export default {
   right: 0;
   bottom: 0;
   min-height: 100vh;
-  background-color: rgb(200, 200, 200);
-  opacity: 0.4;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.65;
   content: "";
   display: block;
 }

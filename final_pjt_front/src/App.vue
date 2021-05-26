@@ -56,12 +56,12 @@ export default {
 };
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
 * {
   color: #000000;
 }
-body {
-  font-family: "Noto Sans KR", sans-serif;
+div {
+  font-family: 'Nanum Gothic', sans-serif;
 }
 #app {
   background-color: rgb(255, 255, 255);
