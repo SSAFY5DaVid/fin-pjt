@@ -43,7 +43,8 @@ export default {
     },
     getMovies: function () {
       const config = this.setToken()
-      axios.get(`${SERVER_URL}/posts/recommended`,config)
+      const mode = this.mode
+      axios.get(`${SERVER_URL}/posts/recommended?mode=${mode}`,config, {params: {mode: this.mode}})
       .then((res)=>{  
         this.movieList = res.data
         }).catch((err)=>{
