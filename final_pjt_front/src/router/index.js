@@ -13,6 +13,7 @@ import ArticleDetail from '@/views/articles/ArticleDetail'
 import ArticleUpdate from '@/views/articles/ArticleUpdate'
 import MovieReviewForm from '@/views/MovieReviewForm'
 import CreateMovieReview from '../views/CreateMovieReview.vue'
+import Recommend from '../views/Recommend.vue'
 
 Vue.use(VueRouter)
 
@@ -81,7 +82,12 @@ const routes = [
     path: '/detail/:id/movie_review_form',
     name: 'movie_review_form',
     component: MovieReviewForm,
-  },  
+  },
+  {
+    path: '/recommend',
+    name: 'Recommend',
+    component: Recommend,
+  },    
 ]
 
 const router = new VueRouter({
