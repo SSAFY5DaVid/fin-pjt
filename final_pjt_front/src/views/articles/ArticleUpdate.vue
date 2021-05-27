@@ -37,8 +37,7 @@ export default {
       .then((res)=>{
         console.log(res)
         this.$router.push({name : "ArticleList"})
-      })
-      .catch((err)=>{
+      }).catch((err)=>{
         console.log(err)
       })
     }

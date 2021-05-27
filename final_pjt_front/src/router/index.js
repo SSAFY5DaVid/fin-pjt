@@ -1,7 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 import Main from "@/views/Main.vue"
-import MainVuex from "@/views/MainVuex.vue"
 import MovieDetail from "@/views/MovieDetail.vue"
 import Search from "@/views/Search.vue"
 import Signup from '@/views/accounts/Signup'
@@ -22,11 +21,6 @@ const routes = [
     path: "/",
     name: "Main",
     component: Main,
-  },
-  {
-    path: "/mainvuex",
-    name: "MainVuex",
-    component: MainVuex,
   },
   {
     path: "/detail/:id",

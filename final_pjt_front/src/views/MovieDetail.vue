@@ -189,10 +189,9 @@ export default {
     axios.get(`${SERVER_URL}/articles/movie_review_list_create/`,config)
     .then((res)=>{  
       this.Reviews = res.data
-      })
-    .catch((err)=>{
+      }).catch((err)=>{
       console.log(err)
-    })
+    })  
   }
 }
 </script>

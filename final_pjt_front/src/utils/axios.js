@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "axios"
 
-const DOMAIN = "https://api.themoviedb.org/3/";
+const DOMAIN = "https://api.themoviedb.org/3/"
 const API_KEY = process.env.VUE_APP_THEMOVIEDB_API_KEY
 const request = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
@@ -23,4 +23,4 @@ export const movieApi = {
         query: keyword,
       },
     }),
-};
+}

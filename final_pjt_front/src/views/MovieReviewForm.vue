@@ -108,8 +108,7 @@ export default {
       .then(()=>{
         // 저장한 값을 보냄 호출 : $route.params.review
         this.$router.push({name : "Detail", params: { review: movieReview }})
-      })
-      .catch((err)=>{
+      }).catch((err)=>{
         console.log(err)
       })
     }

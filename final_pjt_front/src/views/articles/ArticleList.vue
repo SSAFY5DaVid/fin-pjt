@@ -58,8 +58,7 @@ export default {
     axios.get(`${SERVER_URL}/articles/`,config)
     .then((res)=>{  
       this.Posts = res.data
-      })
-    .catch((err)=>{
+      }).catch((err)=>{
       console.log(err)
     })
   }

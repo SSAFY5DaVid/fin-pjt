@@ -3,7 +3,6 @@ from django.conf import settings
 
 class MovieReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="movie_reviews")
-    like = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name = 'user_like')
     movie_title = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
     movie_id = models.IntegerField()
