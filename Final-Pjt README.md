@@ -109,6 +109,7 @@ VUE_APP_THEMOVIEDB_API_KEY="5baac7ac711a4bc84e4d345fc917a4da"
 ```markdown
 ## 1. 영화 조회 서비스
 - API 데이터 기반 영화조회 서비스
+- 조회한 영화 정보 및 Youtube 영상 제공
 ## 2. 영화 추천 서비스
 - 랜덤 추천
 ## 3. community 기능
@@ -262,6 +263,8 @@ export const movieApi = {
 
 * Search.vue
 
+![Search](Final-Pjt README.assets/Search.PNG)
+
 ```javascript
 export default {
   data(){
@@ -342,110 +345,243 @@ export default {
 }
 ```
 
+* MovieDetail.vue
+
+![moviedetail](Final-Pjt README.assets/moviedetail.PNG)
+
+
 ```javascript
-toDetail: function (movie) {
-      this.$router.push({name: 'MovieDetail', query: {movie: movie}})
-      // this.$router.push({name: 'MovieDetail', params: {movie: `${movie}`}})
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
+export default {
+  data() {
+    return {
+      movieDetail: {},
+      Reviews : [],
+      me : localStorage.getItem('username')
     }
+  },
+  async mounted() {
+    this.SET_LOADING(true)
+    console.log(this.$route)
+    console.log(this.$route.params.id)
+    const { id } = this.$route.params
+    const { data } = await movieApi.movieDetail(id)
+    // axios 요청 보내기
+    console.log(data)
+    this.movieDetail = data
+    this.SET_LOADING(false)
+    // backdro
+  },
+  methods: {
+    ...mapMutations(["SET_LOADING"]),
+    image(img) {
+      console.log()
+      return `https://image.tmdb.org/t/p/original/${img}`
+    },
+    youtube(src) {
+      return `https://www.youtube.com/embed/${src}`
+    },
+    setToken : function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers : {
+          Authorization : `JWT ${token}`,
+        }
+      }
+      return config
+    },
+    getStar (rank) {
+      let rankStar = '★'
+      for (let i=1;i<rank;i++){
+        rankStar += '★'
+      }
+      return rankStar
+    },
+    onDelete : function (review) {
+      const config = this.setToken()
+      axios.delete(`${SERVER_URL}/articles/movie_review_delete/${review.id}/`,config)
+      .then(()=>{
+      this.$router.go(this.$router.currentRoute)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+  },
+  created: function () {
+    const config = this.setToken()
+    axios.get(`${SERVER_URL}/articles/movie_review_list_create/`,config)
+    .then((res)=>{  
+      this.Reviews = res.data
+      }).catch((err)=>{
+      console.log(err)
+    })  
+  }
+}
 ```
 
 
 
 ### 4.2 추천 서비스
 
-- MovieRecommend.vue에서 Random으로 추천 
-  - random으로 4개 뽑아서 정렬 
+- Recommend.vue에서 카테고리 선택하여 추천 
+  - 최신, 인기, 평점을 기준으로 각각 선택하는 목록에 대하여 정렬하여 보여줌
+
+![recommend](Final-Pjt README.assets/recommend.png)
 
 ```javascript
-getNumbers: function () {
-      const population = _.range(100)
-      this.numbers = _.sampleSize(population, 4)
+<template>
+    ...
+    <select v-model="mode" class="btn btn-light border d-flex justify-content-start form-select mb-4" style="width:30%">
+      <option value="latest">최신 영화 추천</option>
+      <option value="popular">인기 영화 추천</option>
+      <option value="vote">평점순 영화 추천</option>
+    </select>
+	...
+</template>
+
+export default {
+  data : function () {
+    return {
+      mode: 'latest',
+      movieList: [],
+    } 
+  },
+  methods : {
+    setToken : function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers : {
+          Authorization : `JWT ${token}`,
+        }
+      }
+      return config
     },
-getImgUrl: function (url) {
-    const imgUrl = `https://image.tmdb.org/t/p/w185${url}`
-    return imgUrl
-},
-refresh: function () {
-    this.getNumbers()
-},
+    getMovies: function () {
+      const config = this.setToken()
+      const mode = this.mode
+      axios.get(`${SERVER_URL}/posts/recommended?mode=${mode}`,config, {params: {mode: this.mode}})
+      .then((res)=>{  
+        this.movieList = res.data
+        }).catch((err)=>{
+        console.log(err)
+        })
+      },
+  },
+  watch: {
+    mode: {
+      handler: function () {
+        this.getMovies()
+      }
+    }
+  },
+  created: function () {
+    this.getMovies()
+  }
+}
 ```
 
 
 
 ### 4.3  커뮤니티 기능 
 
-- Articles.vue 에서 article 쓰기, 수정, 삭제 기능 구현 
+- article 쓰기, 수정, 삭제 기능 구현 
 
-  - 쓰기 (getArticles)
+  - 쓰기 (ArticleCreated)
 
-  ```javascript
-    getArticles: function () {
-        const config = this.getToken()
-        axios.get(`${SERVER_URL}/articles/`, config)
-          .then((res) => {
-            // console.log(res.data)
-            this.articles = res.data
-            this.articles.reverse()
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      },
-  ```
+  ![article](Final-Pjt README.assets/article-1622091602198.PNG)
 
-  - 삭제(delete)
+  ![article1](Final-Pjt README.assets/article1-1622091616994.PNG)
+
+  ![article2](Final-Pjt README.assets/article2.PNG)
 
   ```javascript
-      deleteArticle: function (article) {
-        const config = this.getToken()
-        // console.log(article)
-        axios.delete(`${SERVER_URL}/articles/${article.id}/`, config)
-          .then(res => {
-            const idx = this.articles.findIndex(article => {
-              return article.id === res.data.id
-            })
-            this.articles.splice(idx, 1)
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      },
-  ```
-
-  - 수정(update)
-
-  ```javascript
-      updateArticle: function (article) {
-        const config = this.getToken()
-        const articleItem = {
-          title: article.title,
-          rate: article.rate,
-          content: article.content
+    methods : {
+      onArticle : function () {
+        const Article = {
+          title: this.title,
+          content: this.content,
+          username: this.username,
         }
-        axios.put(`${SERVER_URL}/articles/${article.id}/`, articleItem, config)
-          .then((res) => {
-            console.log(res)
-          })
-          .catch((err) => {
+  
+        axios({
+            method: 'POST',
+            url: SERVER_URL + '/articles/',
+            headers: {
+            Authorization: `JWT ${localStorage.getItem('jwt')}`
+          },
+          data: Article
+        }).then(() => {
+            this.$router.push({name : "ArticleList"})
+          }).catch((err) => {
             console.log(err)
           })
-      },
+      }
+    }   
   ```
 
-- CreateArticle.vue 
+  - 수정  (ArticleUpdate)
+
+  ![article3](Final-Pjt README.assets/article3.PNG)
+
+  ![article4](Final-Pjt README.assets/article4.PNG)
 
   ```javascript
-      createArticle: function () {
-        const config = this.getToken()
-        axios.post(`${SERVER_URL}/articles/`, this.article, config)
-          .then(() => {
-            this.$router.push({ name:'Articles' })
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+  methods : {
+        setToken : function () {
+        const token = localStorage.getItem('jwt')
+        const config = {
+          headers : {
+            Authorization : `JWT ${token}`,
           }
+        }
+        return config
+      },
+      onArticle : function () {
+        const config = this.setToken()
+        axios.put(`${SERVER_URL}/articles/${this.$route.params.review.id}/`,this.Article,config)
+        .then((res)=>{
+          console.log(res)
+          this.$router.push({name : "ArticleList"})
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
+    }
   ```
+
+  
+
+  - 삭제  (ArticleDetail)
+
+  ![article5](Final-Pjt README.assets/article5.PNG)
+
+  ```javascript
+      methods : {
+      setToken : function () {
+        const token = localStorage.getItem('jwt')
+        const config = {
+          headers : {
+            Authorization : `JWT ${token}`,
+          }
+        }
+        return config
+      },
+      onDelete : function (id) {
+        const config = this.setToken()
+        axios.delete(`${SERVER_URL}/articles/${id}/`,config)
+        .then(()=>{
+          this.$router.push({name : 'ArticleList'})
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
+    },
+  ```
+
+  
 
 
 

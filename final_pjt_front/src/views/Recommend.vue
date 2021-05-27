@@ -15,6 +15,8 @@
           <img :src="movie.fields.poster_path" class="card-img" style="object-fit: cover;">
           <div class="card-body">
             <h6 class="card-title fw-bold text-truncate">{{ movie.fields.title }}</h6>
+            <p class="card-text">개봉일 : {{ movie.fields.release_date }}</p>
+            <p class="card-text">인기도 : {{ movie.fields.popularity }}</p>
             <p class="card-text">평점 : {{ movie.fields.vote_average }}</p>
           </div>
         </div>
