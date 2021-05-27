@@ -1,11 +1,11 @@
 <template>
   <div class="container search-box">
     <h1>Search</h1>
-    <div>
-      <b-form @submit.prevent="onSearch">
-          <b-form-input class="btn btn-secondary search-form my-3" v-model="keyword" placeholder="영화 제목을 입력하세요."></b-form-input>
-      </b-form>
-    </div>
+    <b-form @submit.prevent="onSearch">
+        <input class="btn btn-secondary search-form my-3" v-model="keyword" placeholder="영화 제목을 입력하세요.">
+        </input>
+        <button class="btn btn-light border ghost-button ml-4" @submit.prevent="onSearch"><b-icon icon="Search" style="width: 25px; height: 25px;"></b-icon> </button>       
+    </b-form>
     <MovieText v-if="movieList" :text="'Search Result'"></MovieText>
     <MovieLists :movieList="movieList"></MovieLists>
   </div>
@@ -51,13 +51,6 @@ export default {
 </script>
 
 <style>
-.search-form {
-  min-width: 5%;
-}
-::placeholder { 
-  color: white;
-  opacity: 1;
-}
 .search-box {
   position: relative;
   width : 100%;
@@ -66,4 +59,12 @@ export default {
   overflow: hidden;
   padding: 100px;
 }
+.search-form {
+  min-width: 70%;
+}
+::placeholder { 
+  color: white;
+  opacity: 0.4;
+}
+
 </style>

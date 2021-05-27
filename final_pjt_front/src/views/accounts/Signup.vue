@@ -11,7 +11,9 @@
       <div>
         <input class="btn btn-secondary login-form my-3" placeholder="비밀번호 확인" type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
       </div>
-      <button class="btn btn-secondary login-form my-3" @click="signup">회원가입</button>
+      <div class="d-flex justify-content-end">
+      <button class=" btn btn-secondary login-form my-3" @click="signup">회원가입</button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
-    <input  class="btn btn-secondary comment-form" type="text" v-model="comment.content" @keypress.enter="createComment">
-    <button  class="btn btn-secondary ghost-button mx-4" @click="createComment">COMMENT</button>
+    <input class="btn btn-secondary comment-form my-3" v-model="comment.content" placeholder="댓글을 입력하세요."  @keypress.enter="createComment">
+    <button  class="btn btn-light border ghost-button my-3 ml-3" @click="createComment">COMMENT</button>
   </div>
 </template>
 
@@ -48,6 +48,6 @@ export default {
 
 <style>
 .comment-form {
-  min-width: 5%;
+  min-width: 70%;
 }
 </style>

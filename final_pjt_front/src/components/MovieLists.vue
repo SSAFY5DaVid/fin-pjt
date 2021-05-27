@@ -42,4 +42,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.movie-date { 
+  color: gray;
+  opacity: 0.8;
+  font-size: 12px;
+}
+.movie-title { 
+  font-size: 14px;
+}
+</style>

@@ -3,10 +3,10 @@
   <div class="align-items-center">
     <h1>Login</h1>
     <div>
-      <input  class="btn btn-secondary login-form my-3" placeholder="username" type="text" v-model="credentials.username">
+      <input  class="btn btn-secondary login-form my-3" placeholder="사용자 이름" type="text" v-model="credentials.username">
     </div>
     <div>
-      <input  class="btn btn-secondary login-form my-3" placeholder="password" type="password" v-model="credentials.password" @keypress.enter="login">
+      <input  class="btn btn-secondary login-form my-3" placeholder="비밀번호" type="password" v-model="credentials.password" @keypress.enter="login">
     </div>
     <div class="d-flex justify-content-end">
       <button class="btn btn-secondary login-form my-3" @click="login">login</button>
@@ -75,7 +75,7 @@ export default {
 }
 ::placeholder { 
   color: white;
-  opacity: 1;
+  opacity: 0.4;
 }
 
 .login-box {

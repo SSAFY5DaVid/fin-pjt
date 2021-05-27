@@ -1,11 +1,23 @@
 <template>
   <div>
     <div class="container d-flex flex-wrap" v-if="nowPlaying">
-      <div class="h4 ml-3 mt-5 mb-4">Now Playing</div>
+      <div class="h4 ml-3 mt-5 mb-4">
+        <b-icon icon="film" style="width: 25px; height: 25px;"></b-icon> 
+       현재상영작  
+        <b-icon icon="film" style="width: 25px; height: 25px;"></b-icon> 
+      </div>
       <MovieLists :movieList="nowPlaying"></MovieLists>
-      <MovieText :text="'Popular'"></MovieText>
+      <div class="h4 ml-3 mt-5 mb-4">
+        <b-icon icon="film" style="width: 25px; height: 25px;"></b-icon> 
+       인기상영작  
+        <b-icon icon="film" style="width: 25px; height: 25px;"></b-icon> 
+      </div>
       <MovieLists :movieList="popular"></MovieLists>
-      <MovieText :text="'Comming Soon'"></MovieText>
+      <div class="h4 ml-3 mt-5 mb-4">
+        <b-icon icon="film" style="width: 25px; height: 25px;"></b-icon> 
+       개봉예정작  
+        <b-icon icon="film" style="width: 25px; height: 25px;"></b-icon> 
+      </div>
       <MovieLists :movieList="upComming"></MovieLists>
     </div>
   </div>
