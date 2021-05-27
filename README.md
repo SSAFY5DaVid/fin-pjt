@@ -1,10 +1,12 @@
 # Final-Pjt
 
+
+
 [TOC]
 
 ## 제작기간
 
-2021.05.20 - 2020.05.27
+2021.05.20 - 2021.05.27
 
 ## 팀원소개
 
@@ -67,15 +69,15 @@ VUE_APP_THEMOVIEDB_API_KEY="5baac7ac711a4bc84e4d345fc917a4da"
 
 ## 1 .팀원 정보 및 업무 분담 내역
 
-### 공통업무 : front 및 back 기본 모델링 / 
+### 공통업무 : front (Main, Search, MovieDetail) 및 back 기본 모델링 
 
 ### 팀장 : 정원화
 
-- 
+- `moviedetailreview`, `style`, `css`
 
 ### 팀원 : 김다윗
 
-- 
+- `article`, `comment`, `login`, `signup`
 
   
 
@@ -261,7 +263,7 @@ export const movieApi = {
 }
 ```
 
-* Search.vue
+* Search.vue(영화목록조회)
 
 ![Search](Final-Pjt README.assets/Search.PNG)
 
@@ -345,7 +347,7 @@ export default {
 }
 ```
 
-* MovieDetail.vue
+* MovieDetail.vue(youtube 영상 및 해당 영화 평점 남기기)
 
 ![moviedetail](Final-Pjt README.assets/moviedetail.PNG)
 
@@ -581,7 +583,57 @@ export default {
     },
   ```
 
-  
+
+
+
+## 5. 오류 디버깅
+
+### 5.1 serializer 관련 오류
+
+> 게시글을 작성할 때 작성자와 게시글의 관계를 나타내려고 하는 부분에서 `user`의 정보가 들어있지 않다는 오류가 발생하였음.
+
+**문제상황**
+
+- articles/views.py (article을 생성해주는 함수)
+
+  - ```python
+    serializer = ArticleSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)         
+    ```
+
+  * `serializer.is_valid(raise_exception=True):` 이 부분에서 걸려 `user` 정보를 받아가지 못하여 계속해서 에러가 발생하였다. 
+
+**해결방안**
+
+- `serializers`에서 `user` 정보를 `read_only_fields`에 담아 유효성 검사를 피하게 함으로써 에러가 발생하는 문제를 해결하였다. 
+
+
+### 5.2 User 문제 
+
+> 유저 정보가 필요하게 `modeling`을 한 후 `django`에서 함수를 작성할 때 `@authentication_classes([JSONWebTokenAuthentication])`, `@permission_classes([IsAuthenticated])` 해당 데코레이터를 누락하여 `anonymous user` 에러가 계속해서 발생하였다.  
+
+* **해결방안**
+  - `@authentication_classes([JSONWebTokenAuthentication])`, `@permission_classes([IsAuthenticated])` 해당 데코레이터를 추가해 줌으로써 에러 문제를 해결하였다. 
+
+
+
+## :exclamation: 6. 느낀점
+
+```
+	
+	마지막 프로젝트인 영화 추천 사이트를 만들면서 vue.js와 django에 더 친숙해지고 더 잘 다룰 수 있게 되었다. 수업시간을 통해 배웠던 이론들과 명세를 기반으로 하나씩 구현하여 작동하는 결과물을 보니 큰 만족감이 있었다. 
+
+	막연하게 이론과 생각을 통해서 상상코딩을 했을 때는 큰 어려움 없이 수월하게 프로젝트가 진행될 것이라 생각하였다. 하지만, 실제 프로젝트를 진행하며 학습하며 인지하지 못하였던 부족한 점과 생각지도 못했던 곳에서 마주한 오류들을 발견하고 이를 수정하면서 많은 부분 발전을 이루었다고 생각한다.
+	
+	특히 vue를 사용할 때 많은 어려움이 있었다. 그렇기 때문에 처음 프로젝트를 실행하며 조금이라도 더 익숙한 django만 사용하여 진행해 볼까 라는 생각도 하였지만, 결과적으로 많은 시행착오를 통해 vue 사용에 익숙해졌고 좋은 결과물을 만들어 낸 것 같아 기뻤다.
+    
+    우리가 쉽게 접하는 웹을 뒤에서는 많은 사람들이 시간과 예산을 쏟아부어 내가 편리하게 사용하는구나 라는 부분에서 다시 한번 생각해 보게 되었고 전반적인 과정을 모두 체험할 수 있는 좋은 경험이었다. 
+	
+    수업시간에 배운 내용 들을 내가 과연 다 소화할 수 있을까 라는 물음이 있었는데 이번 과제를 수행하면서 어느 정도 자신감이 생긴 것 같다. 지금 느꼈던 이 감정들을 잊지 않고 정진해 나간다면 좋은 결과가 생기지 않을까 라고 조심스럽게 예상해 본다. 
+
+```
 
 
 
